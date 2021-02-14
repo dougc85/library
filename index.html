@@ -7,6 +7,26 @@
         <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Cinzel">
     </head>
     <body>
+        <div class="screen-dim hide">
+            <div class="form-box">
+                <h2>Enter Book Info</h2>
+                <h4>(Leave Fields Blank if Unknown)</h4>
+                <form>
+                    <label for="title">Title: </label>
+                    <input maxlength="33" class="field title-field" type="text" name="title" id="title" placeholder="Enter Title Here">
+                    <label for="author-first">Author: </label>
+                    <input maxlength="20" class="field first-field" type="text" name="author-first" id="author-first" placeholder="First Name">
+                    <input maxlength="20" class="field second-field" type="text" name="author-last" id="author-last" placeholder="Last Name">
+                    <label for="year">Year Published</label>
+                    <input maxlength="4" class="field year-field" type="text" name="year" id="year" placeholder="e.g., 1987">
+                    <label for="pages">No. of Pages</label>
+                    <input maxlength="6" class="field pages-field" type="text" name="pages" id="pages" placeholder="e.g., 300">
+                    <label class="check-text" for="read-check">Already Read?</label>
+                    <input class="check" type="checkbox" name="read-check" id="read-check">
+                </form>
+                <button class="add-button">Add Book</button>
+            </div>
+        </div>
         <div class="screen-background" id="screen-background"></div>
         <div class="color-layer" id="color-screen"></div>
         <header>
