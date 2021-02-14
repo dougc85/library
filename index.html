@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+        <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Cinzel">
+    </head>
+    <body>
+        <div class="screen-background" id="screen-background"></div>
+        <div class="color-layer" id="color-screen"></div>
+        <header>
+            <div class="logo-box">
+                <h1>Library</h1>
+            </div>
+            <div class="add-box add-click">
+                <h2 class="add-click">+ Add A Book</h2>
+            </div>
+        </header>
+        <div class="info-box">
+            <div class="sort-box">
+                <h4>Sort: </h4>
+                <form>
+                    <select  id="dropdown" name="sort-order">
+                        <option>By Title</option>
+                        <option>By Date</option>
+                        <option>By Author</option>
+                        <option>By Read/Unread</option>
+                        <option>By Unread/Read</option>
+                    </select>
+                </form>
+            </div>
+            <div class="key-box">
+                <div class="color-box read">
+                    <div class="key-colors read-color"></div>
+                    <h4 class="key-text">Read</h4>
+                </div>
+                <div class="color-box unread">
+                    <div class="key-colors unread-color"></div>
+                    <h4 class="key-text">Unread</h4>
+                </div>
+            </div>
+        </div>
+        <div class="library-box">
+        </div>
+        <footer class="stats-box"></footer>
+        <script src="code.js"></script>
+    </body>
+</html>
