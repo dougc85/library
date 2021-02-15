@@ -143,8 +143,26 @@ function sortLibrary(lib, method) {
         lib.sort(function(a,b) {
             let titleA = a.title.toLowerCase();
             let titleB = b.title.toLowerCase();
-            
 
+            if (titleA.slice(0, 4) == "the ") {
+                titleA = titleA.slice(4);
+            }
+            if (titleB.slice(0, 4) == "the ") {
+                titleB = titleB.slice(4);
+            }
+            if (titleA.slice(0, 2) == "a ") {
+                titleA = titleA.slice(2);
+            }
+            if (titleB.slice(0, 2) == "a ") {
+                titleB = titleB.slice(2);
+            }
+            if (titleA.slice(0, 3) == "an ") {
+                titleA = titleA.slice(3);
+            }
+            if (titleB.slice(0, 3) == "an ") {
+                titleB = titleB.slice(3);
+            }
+            
             if (titleA > titleB) {
                 return 1;
             }
@@ -296,5 +314,8 @@ addBookToLibrary('Beowulf', '{Unknown}', '', '300', '843', true);
 addBookToLibrary('Gilead', 'Marilynn', 'Robinson', '300', '2003', false);
 addBookToLibrary('The Beautiful Ones', 'Prince', '', '288', '2019', false);
 addBookToLibrary('Hamlet', 'William', 'Shakespeare', '215', '1604', true);
+addBookToLibrary("A Connecticut Yankee in King Arthur's Court", 'Mark', 'Twain', '300', '1889', false);
+addBookToLibrary("An Indigenous Peoples' History of the United States", 'Roxanne', 'Dunbar-Ortiz', '312', '2015', false);
+
 
 displayLibrary(library);
