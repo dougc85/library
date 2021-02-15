@@ -1,4 +1,5 @@
-let dropDown = document.getElementById('dropdown');
+const dropDown = document.getElementById('dropdown');
+const formScreen = document.querySelector('.screen-dim');
 
 
 dropDown.addEventListener("change", (e) => {
@@ -17,16 +18,63 @@ document.addEventListener('click', function(e) {
         removedBook.parentNode.removeChild(removedBook);
 
     } else if (e.target.classList.contains('add-click')) {
-        console.log('add-click');
+        formScreen.classList.toggle('hide');
 
-    } else if (e.target.classList.contains('switch-listen')) {
+    } else if (e.target.classList.contains('add-button')) {
+        formScreen.classList.toggle('hide');
+
+        let title = document.querySelector('.title-field');
+        let authorFirst = document.querySelector('.first-field');
+        let authorSecond = document.querySelector('.second-field');
+        let year = document.querySelector('.year-field');
+        let pages = document.querySelector('.pages-field');
+        let checkBox = document.querySelector('.check');
+
+        let titleValue, authorFirstValue, authorSecondValue, pagesValue, yearValue, readValue;
+
+        if (title.value == "") {
+            titleValue = "{Title Unknown}";
+        } else {
+            titleValue = title.value;
+        }
+
+       if (authorFirst.value == "" && authorSecond.value == "") {
+           authorFirstValue = "{Unknown}"; 
+           authorSecondValue = "";
+       } else if (authorFirst.value == "") {
+           authorFirstValue = authorSecond.value;
+       } else {
+           authorFirstValue = authorFirst.value;
+           authorSecondValue = authorSecond.value;
+       }
+
+       if (pages.value == "") {
+           pagesValue = "?";
+       } else {
+           pagesValue = pages.value;
+       }
+
+       if (year.value == "") {
+           yearValue = "?";
+       } else {
+           yearValue = year.value;
+       }
+
+        addBookToLibrary(titleValue, authorFirstValue, authorSecondValue, pagesValue, yearValue, checkBox.checked);
+        displayLibrary(library);
+
+        title.value = "";
+        authorFirst.value = "";
+        authorSecond.value = ""; 
+        pages.value = ""; 
+        year.value = "";
+        checkBox.checked = false;
+
+    }else if (e.target.classList.contains('switch-listen')) {
         let switchDirection = e.target;
         if (e.target.classList.contains('switcher')) {
             switchDirection = e.target.parentNode;
         }
-
-        console.log(switchDirection);
-
         let targetBook = switchDirection.parentNode.parentNode;
         let bookObject = library[targetBook.dataset.id];
 
@@ -65,16 +113,21 @@ function Book(title, authorFirst, authorLast, pages, year, read) {
 
 function sortLibrary(lib, method) {
     if (method == "By Date") {
+
         lib.sort(function(a,b) {
-            let dateA = +a.year;
-            let dateB = +b.year;
+            let dateA = (a == "?") ? a.year : +a.year;
+            let dateB = (b == "?") ? b.year : +b.year;
             let titleA = a.title.toLowerCase();
             let titleB = b.title.toLowerCase();
-
+            
             if (dateA == dateB) {
                 if (titleA > titleB) {
                     return 1;
                 }
+                return -1;
+            } else if (dateA == "?") {
+                return 1;
+            } else if (dateB == "?") {
                 return -1;
             } else {
                 if (dateA > dateB) {
@@ -88,7 +141,8 @@ function sortLibrary(lib, method) {
         lib.sort(function(a,b) {
             let titleA = a.title.toLowerCase();
             let titleB = b.title.toLowerCase();
-    
+            
+
             if (titleA > titleB) {
                 return 1;
             }
@@ -108,11 +162,25 @@ function sortLibrary(lib, method) {
                     return 1;
                 }
                 return -1;
+            } else if (authorFirstA == "{unknown}") {
+                return 1;
+            } else if (authorFirstB == "{unknown}") {
+                return -1;
             } else if (authorLastA == authorLastB) {
                 if (authorFirstA > authorFirstB) {
                     return 1;
                 }
                 return -1;
+            } else if (authorLastA == "") {
+                if (authorFirstA > authorLastB) {
+                    return 1;
+                }
+                return -1;
+            } else if (authorLastB == "") {
+                if (authorFirstB > authorLastA) {
+                    return -1;
+                }
+                return 1;
             } else {
                 if (authorLastA > authorLastB) {
                     return 1;
@@ -222,7 +290,9 @@ function displayLibrary(lib) {
 
 addBookToLibrary('Capital', 'Karl', 'Marx', '1000', '1860', true);
 addBookToLibrary('Game of Thrones', "George R. R. ", "Martin", '800', '1992', true);
-addBookToLibrary('Beowulf', 'Unkown', 'Unknown', '300', '843', true);
+addBookToLibrary('Beowulf', '{Unknown}', '', '300', '843', true);
 addBookToLibrary('Gilead', 'Marilynn', 'Robinson', '300', '2003', false);
+addBookToLibrary('The Beautiful Ones', 'Prince', '', '288', '2019', false);
+addBookToLibrary('Hamlet', 'William', 'Shakespeare', '215', '1604', true);
 
 displayLibrary(library);
