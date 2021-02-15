@@ -16,6 +16,7 @@ document.addEventListener('click', function(e) {
         let removedBook = e.target.parentNode;
         library.splice(removedBook.dataset.id, 1);
         removedBook.parentNode.removeChild(removedBook);
+        displayLibrary(library);
 
     } else if (e.target.classList.contains('add-click')) {
         formScreen.classList.toggle('hide');
@@ -43,6 +44,7 @@ document.addEventListener('click', function(e) {
            authorSecondValue = "";
        } else if (authorFirst.value == "") {
            authorFirstValue = authorSecond.value;
+           authorSecondValue = "";
        } else {
            authorFirstValue = authorFirst.value;
            authorSecondValue = authorSecond.value;
